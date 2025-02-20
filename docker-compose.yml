@@ -13,8 +13,9 @@ services:
       DATABASE_PASSWORD: _pm.db33A%xy7
 
   db:
-    container_name: "mysqldb"
     image: "mysql:8.0"
+    restart: always
+    container_name: "mysqldb"
     ports:
       - "3306:3306"
     volumes:

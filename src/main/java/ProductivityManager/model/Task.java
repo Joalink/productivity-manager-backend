@@ -6,7 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Data
 @Entity
@@ -17,9 +18,9 @@ public class Task {
     private Long id;
 
     private String description;
-    private LocalDateTime start_date;
+    private LocalDate end_date;
     private int duration;
-    private LocalDateTime recorded_time;
+    private LocalTime recorded_time;
     private Status status;
 
     public void setId(Long id) {

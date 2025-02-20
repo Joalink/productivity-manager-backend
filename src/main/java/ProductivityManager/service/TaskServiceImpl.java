@@ -18,9 +18,14 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
+    public List<Task> getTaskByStatus(Task.Status status) {
+        return taskRepository.findByStatus(status);
+    }
+    @Override
     public Task getTaskById(Long id) {
         return taskRepository.findById(id).orElse(null);
     }
+
 
     @Override
     public Task createTask(Task task){
@@ -29,8 +34,15 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public Task updateTask(Long id, Task task) {
-        task.setId(id);
-        return taskRepository.save(task);
+        return taskRepository.findById(id)
+                .map(existingTask -> {
+                    existingTask.setDescription(task.getDescription());
+                    existingTask.setEnd_date(task.getEnd_date());
+                    existingTask.setDuration(task.getDuration());
+                    existingTask.setStatus(task.getStatus());
+                    return taskRepository.save(existingTask);
+                })
+                .orElseThrow(() -> new RuntimeException("Tarea no encontrada con ID: " + id));
     }
 
     @Override

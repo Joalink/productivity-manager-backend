@@ -21,6 +21,11 @@ public class TaskController {
         return taskService.getAllTasks();
     }
 
+    @GetMapping("/status/{status}")
+    public List<Task> getTasksByStatus(@PathVariable Task.Status status) {
+        return taskService.getTaskByStatus(status);
+    }
+
     @GetMapping("/{id}")
     public Task getTaskById(@PathVariable Long id){
         return taskService.getTaskById(id);
